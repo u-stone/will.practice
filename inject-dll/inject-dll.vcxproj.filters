@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{88ea37db-78d9-4525-a0ce-a310d7e2c618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="inject-dll.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessEnumerator.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcDef.h">
+      <Filter>code</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="inject-dll.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessEnumerator.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="inject-dll.ico">
+      <Filter>app</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>app</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="inject-dll.rc">
+      <Filter>app</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

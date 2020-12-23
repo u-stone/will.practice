@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{d40d709a-4b12-4cdb-94d0-3fe1beef12ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="seh-cpp-exception-win.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>code</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="seh-cpp-exception-win.ico">
+      <Filter>app</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>app</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="seh-cpp-exception-win.rc">
+      <Filter>app</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="seh-cpp-exception-win.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{7070dfe5-daa1-42e5-9154-22c64c86e748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code">
+      <UniqueIdentifier>{bdaf112e-c267-461f-852e-18e323e1158f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="main-proj.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="IAT.h">
+      <Filter>code</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IAT.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="main-proj.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="main-proj.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>res</Filter>
+    </Image>
+    <Image Include="main-proj.ico">
+      <Filter>res</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
