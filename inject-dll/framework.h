@@ -13,3 +13,5 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+#pragma comment(lib, "Shlwapi.lib")
