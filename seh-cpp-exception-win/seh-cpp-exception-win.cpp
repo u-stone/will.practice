@@ -5,7 +5,7 @@
 #include "seh-cpp-exception-win.h"
 #include "Test.h"
 
-//#define ENABLE_DUMP
+#define ENABLE_DUMP
 
 #ifdef ENABLE_DUMP
 #pragma comment(lib, "Dbghelp.lib")

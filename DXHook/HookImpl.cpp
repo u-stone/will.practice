@@ -34,84 +34,84 @@ void HookImpl::SetTargetProcId(DWORD pid)
 
 void HookImpl::Install()
 {
-    //HANDLE hProcess = NULL;
-    //char* param_remote = nullptr;
-    //HANDLE thread = NULL;
-    //__try {
-    //    hProcess = OpenProcess(
-    //        PROCESS_ALL_ACCESS,
-    //        FALSE,
-    //        pid_
-    //    );
+    HANDLE hProcess = NULL;
+    char* param_remote = nullptr;
+    HANDLE thread = NULL;
+    __try {
+        hProcess = OpenProcess(
+            PROCESS_ALL_ACCESS,
+            FALSE,
+            pid_
+        );
 
-    //    char module_name[MAX_PATH];
-    //    ::GetModuleFileNameA(
-    //        ModuleFromAddress(DummyFn),
-    //        module_name,
-    //        MAX_PATH
-    //    );
+        char module_name[MAX_PATH];
+        ::GetModuleFileNameA(
+            ModuleFromAddress(DummyFn),
+            module_name,
+            MAX_PATH
+        );
 
-    //    int size_module_name = strnlen_s(module_name, MAX_PATH) + 1;
+        int size_module_name = strnlen_s(module_name, MAX_PATH) + 1;
 
-    //    /// prepare memory of parameter for remote thread.
-    //    param_remote = (char*)VirtualAllocEx(
-    //        hProcess,
-    //        NULL,
-    //        size_module_name,
-    //        MEM_COMMIT,
-    //        PAGE_READWRITE
-    //    );
+        /// prepare memory of parameter for remote thread.
+        param_remote = (char*)VirtualAllocEx(
+            hProcess,
+            NULL,
+            size_module_name,
+            MEM_COMMIT,
+            PAGE_READWRITE
+        );
 
-    //    if (!param_remote) {
-    //        __leave;
-    //    }
+        if (!param_remote) {
+            __leave;
+        }
 
-    //    if (!WriteProcessMemory(
-    //        hProcess,
-    //        param_remote,
-    //        module_name,
-    //        size_module_name,
-    //        NULL)
-    //        )
-    //    {
-    //        __leave;
-    //    }
+        if (!WriteProcessMemory(
+            hProcess,
+            param_remote,
+            module_name,
+            size_module_name,
+            NULL)
+            )
+        {
+            __leave;
+        }
 
-    //    PTHREAD_START_ROUTINE thread_routine = (PTHREAD_START_ROUTINE)::GetProcAddress(
-    //        ::GetModuleHandleA("Kernel32"), "LoadLibrary");
-    //    if (!thread_routine) {
-    //        __leave;
-    //    }
+        PTHREAD_START_ROUTINE thread_routine = (PTHREAD_START_ROUTINE)::GetProcAddress(
+            ::GetModuleHandleA("Kernel32"), "LoadLibrary");
+        if (!thread_routine) {
+            __leave;
+        }
 
-    //    thread = ::CreateRemoteThread(
-    //        hProcess,
-    //        NULL,
-    //        0,
-    //        thread_routine,
-    //        (PVOID)param_remote,
-    //        0,
-    //        NULL
-    //    );
+        thread = ::CreateRemoteThread(
+            hProcess,
+            NULL,
+            0,
+            thread_routine,
+            (PVOID)param_remote,
+            0,
+            NULL
+        );
 
-    //    if (thread == NULL) {
-    //        __leave;
-    //    }
+        if (thread == NULL) {
+            __leave;
+        }
 
-    //    ::WaitForSingleObject(thread, INFINITE);
-    //}
-    //__finally {
-    //    if (param_remote) {
-    //        ::VirtualFreeEx(hProcess, param_remote, 0, MEM_RELEASE);
-    //    }
+        ::WaitForSingleObject(thread, INFINITE);
+    }
+    __finally {
+        if (param_remote) {
+            ::VirtualFreeEx(hProcess, param_remote, 0, MEM_RELEASE);
+        }
 
-    //    if (thread) {
-    //        ::CloseHandle(thread);
-    //    }
+        if (thread) {
+            ::CloseHandle(thread);
+        }
 
-    //    if (hProcess) {
-    //        ::CloseHandle(hProcess);
-    //    }
-    //}
+        if (hProcess) {
+            ::CloseHandle(hProcess);
+        }
+    }
 }
 
 void HookImpl::Uninstall()

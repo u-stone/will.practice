@@ -23,7 +23,7 @@
     <ProjectGuid>{77545EC7-B055-44D7-AEC2-40CA7184461B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>apihooking</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

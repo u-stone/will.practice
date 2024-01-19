@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "main-proj.h"
 #include "IAT.h"
+#include <string>
 
 #define MAX_LOADSTRING 100
 
@@ -30,6 +31,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+
+    std::string str;
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_MAINPROJ, szWindowClass, MAX_LOADSTRING);

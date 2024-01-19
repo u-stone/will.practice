@@ -5,7 +5,6 @@
 #include "inject-dll.h"
 #include "ProcessEnumerator.h"
 #include <memory>
-#include <shlwapi.h>
 
 #define MAX_LOADSTRING 100
 
@@ -134,26 +133,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_CREATE:
     {
-        break;
-    }
-        
-    case WM_LBUTTONUP:
-    {
         proc_enum_->grab();
         auto pinfo = proc_enum_->get_proc(L"seh-cpp-exception-win.exe");
         inject(pinfo);
-        break;
-    }
 
-    case WM_RBUTTONUP:
-    {
-        proc_enum_->release();
-        proc_enum_->grab();
-        auto pinfo = proc_enum_->get_proc(L"seh-cpp-exception-win.exe");
-        eject(pinfo);
-        break;
     }
-
+        break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
@@ -250,60 +235,5 @@ void inject(ProcInfo pinfo)
 
 void eject(ProcInfo pinfo)
 {
-    HANDLE hProcess = NULL;
-    HANDLE hThread = NULL;
-    while (1) {
-        hProcess = ::OpenProcess(
-            PROCESS_ALL_ACCESS,
-            FALSE,
-            pinfo.pid
-        );
 
-        if (hProcess == NULL) {
-            break;
-        }
-
-        HMODULE hTargetModule = NULL;
-        for (auto& item : pinfo.modules) {
-            auto file_name = PathFindFileName(item.name.c_str());
-            if (_wcsicmp(file_name, L"DXHook.dll") == 0) {
-                hTargetModule = item.hMod;
-                break;
-            }
-        }
-
-        if (hTargetModule == NULL) {
-            break;
-        }
-
-        PTHREAD_START_ROUTINE thread_func = (PTHREAD_START_ROUTINE)
-            ::GetProcAddress(::GetModuleHandle(L"Kernel32"), "FreeLibrary");
-        if (thread_func == NULL) {
-            break;
-        }
-
-        hThread = CreateRemoteThread(
-            hProcess,
-            NULL,
-            0,
-            thread_func,
-            hTargetModule,
-            0,
-            NULL
-        );
-
-        if (hThread == NULL) {
-            break;
-        }
-
-        ::WaitForSingleObject(hThread, INFINITE);
-        break;
-    }
-
-    if (hThread) {
-        CloseHandle(hThread);
-    }
-    if (hProcess) {
-        CloseHandle(hProcess);
-    }
 }

@@ -85,7 +85,7 @@ void ProcessEnumerator::grab_modules(DWORD processID)
 
 void ProcessEnumerator::release()
 {
-    procs_info_.clear();
+    // do nothing.
 }
 
 ProcInfo ProcessEnumerator::get_proc(std::wstring proc_name)
