@@ -9,7 +9,7 @@ DxRenderWnd::DxRenderWnd(HINSTANCE hInst, int width, int height)
   InitDevice();
   InitRenderView();
   SetUpViewPort();
-  LoadHLSL(L"shader/simple.fx", "VS", "");
+  LoadHLSL(L"shader/simple.fx", "VS", "vs_5_0");
 }
 
 void DxRenderWnd::InitDevice()
@@ -53,7 +53,7 @@ void DxRenderWnd::InitDevice()
   sd.OutputWindow = wnd_;
   sd.Windowed = TRUE;
   sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; // Options for handling pixels in a display surface after calling IDXGISwapChain1::Present1.
-  sd.Flags = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL; // over win 8, for better performance.
+  sd.Flags = DXGI_SWAP_EFFECT_FLIP_DISCARD; // over win 8, for better performance.
 
 
   HRESULT hr = ::D3D11CreateDeviceAndSwapChain(adapter, driver_type, module, flags, feature_levels, feature_level_num, sdk_version, &sd, &swap_chain_, &d3d11_device_, &feature_level_selected_, &d3d11_context_);
