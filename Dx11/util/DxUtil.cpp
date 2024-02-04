@@ -1,6 +1,6 @@
 #include "DxUtil.h"
 #include <comdef.h>
-#include "dxerr/dxerr.h"
+#include "../dxerr/dxerr.h"
 
 std::wstring TranslateError(HRESULT hr, std::string file, int line)
 {

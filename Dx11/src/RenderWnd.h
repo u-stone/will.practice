@@ -1,11 +1,13 @@
 ﻿#pragma once
 #include <Windows.h>
+#include "../util/DxUtil.h"
 
 
 class RenderWnd
 {
 public:
   RenderWnd(HINSTANCE hInst, int width, int height);
+  virtual void Init();
 
 private:
   ATOM MyRegisterClass(HINSTANCE hInstance);

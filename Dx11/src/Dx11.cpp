@@ -1,12 +1,11 @@
 // Dx11.cpp : Defines the entry point for the application.
 //
 
-#include "framework.h"
+#include "../framework.h"
 #include "Dx11.h"
 #include "DxRenderWnd.h"
-
-#define MAX_LOADSTRING 100
-
+#include "DxCubeRenderWnd.h"
+#include <memory>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
   _In_opt_ HINSTANCE hPrevInstance,
@@ -16,15 +15,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
   UNREFERENCED_PARAMETER(hPrevInstance);
   UNREFERENCED_PARAMETER(lpCmdLine);
 
-  DxRenderWnd render(hInstance, 800, 600);
-
-  MSG msg;
+  auto render = std::make_shared<DxCubeRenderWnd>(hInstance, 1920, 1080);
+  render->Init();
 
   // Main message loop:
-  while (GetMessage(&msg, nullptr, 0, 0))
+  MSG msg = { 0 };
+  while (WM_QUIT != msg.message)
   {
-    TranslateMessage(&msg);
-    DispatchMessage(&msg);
+    if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+    {
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+    }
+    else
+    {
+      render->Render();
+    }
   }
 
   return (int)msg.wParam;
