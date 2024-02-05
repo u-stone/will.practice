@@ -89,14 +89,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="shader\pixel_shader.fx">
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader\pixel_shader.fx">
       <Filter>Shader</Filter>
-    </None>
-    <None Include="shader\vertex_shader.fx">
+    </FxCompile>
+    <FxCompile Include="shader\vertex_shader.fx">
       <Filter>Shader</Filter>
-    </None>
-    <None Include="shader\cube.fx">
+    </FxCompile>
+    <FxCompile Include="shader\cube.hlsl">
       <Filter>Shader</Filter>
-    </None>
+    </FxCompile>
   </ItemGroup>
 </Project>

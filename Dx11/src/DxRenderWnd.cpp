@@ -73,7 +73,7 @@ void DxRenderWnd::InitDevice()
 
   HRESULT hr = ::D3D11CreateDeviceAndSwapChain(adapter, driver_type, module, flags, feature_levels, feature_level_num, sdk_version, &sd, &swap_chain_, &d3d11_device_, &feature_level_selected_, &d3d11_context_);
   if (FAILED(hr)) {
-    auto err = DxError(hr);
+    DxError(hr);
     return;
   }
 }
@@ -83,13 +83,13 @@ void DxRenderWnd::InitRenderView()
   DxPtr<ID3D11Texture2D> pBackBuffer = nullptr;
   HRESULT hr = swap_chain_->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
   if (FAILED(hr)) {
-    auto err = DxError(hr);
+    DxError(hr);
     return;
   }
 
   hr = d3d11_device_->CreateRenderTargetView(pBackBuffer.get(), NULL, &target_view_);
   if (FAILED(hr)) {
-    auto err = DxError(hr);
+    DxError(hr);
     return;
   }
 
@@ -225,7 +225,7 @@ DxPtr<ID3DBlob> DxRenderWnd::CreateShader(std::wstring filename, std::string ent
 
   HRESULT hr = D3DCompileFromFile(filename.c_str(), shader_macro, include, entry_point.c_str(), target.c_str(), shader_flag1, shader_flag2, &blob, &blob_result);
   if (FAILED(hr)) {
-    auto err = DxError(hr);
+    DxError(hr);
     return nullptr;
   }
 

@@ -15,9 +15,9 @@ DxCubeRenderWnd::DxCubeRenderWnd(HINSTANCE hInst, int width, int height)
 
 void DxCubeRenderWnd::Render()
 {
-  static DWORD start = ::GetTickCount();
+  static ULONGLONG start = ::GetTickCount64();
   static float t = 0.0f;
-  t = (::GetTickCount() - start)/ 1000.0f;
+  t = (::GetTickCount64() - start)/ 1000.0f;
 
   world_ = DirectX::XMMatrixRotationY(t);
 

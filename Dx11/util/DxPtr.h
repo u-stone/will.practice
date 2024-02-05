@@ -41,7 +41,7 @@ public:
     *count_++;
   }
 
-  DxPtr(DxPtr&& rh) : obj_(rh.obj_), count_(rh.count_) {
+  DxPtr(DxPtr&& rh) noexcept : obj_(rh.obj_), count_(rh.count_) {
     rh.obj_ = nullptr;
     rh.count_ = nullptr;
   }
