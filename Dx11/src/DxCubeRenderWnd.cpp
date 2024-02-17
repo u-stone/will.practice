@@ -15,17 +15,27 @@ DxCubeRenderWnd::DxCubeRenderWnd(HINSTANCE hInst, int width, int height)
 
 void DxCubeRenderWnd::Render()
 {
+  using namespace DirectX;
   static ULONGLONG start = ::GetTickCount64();
   static float t = 0.0f;
   t = (::GetTickCount64() - start)/ 1000.0f;
 
   world_ = DirectX::XMMatrixRotationY(t);
 
+  XMMATRIX mspin = XMMatrixRotationZ(-t);
+  XMMATRIX mOrbit = XMMatrixRotationY(-t * 2.0f);
+  XMMATRIX mTranslate = XMMatrixTranslation(-4.0f, 0, 0);
+  XMMATRIX mScale = XMMatrixScaling(0.3f, 0.3f, 0.3f);
+  world2_ = mScale * mspin * mTranslate * mOrbit;
+
   // Clear color
   float clear_color[] = { 0.0f, 0.125f, 0.3f, 1.0f };
   d3d11_context_->ClearRenderTargetView(target_view_.get(), clear_color);
 
-  // update
+  d3d11_context_->ClearDepthStencilView(depth_stencil_view_.get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+
+  // update first cube
   ConstantBuffer cb;
   cb.mWorld = DirectX::XMMatrixTranspose(world_);
   cb.mView = DirectX::XMMatrixTranspose(view_);
@@ -33,13 +43,23 @@ void DxCubeRenderWnd::Render()
   
   d3d11_context_->UpdateSubresource(const_buffer_.get(), 0, NULL, &cb, 0, 0);
 
-  // render
+  // render first cube
   d3d11_context_->VSSetShader(vertex_shader_.get(), NULL, 0);
   d3d11_context_->VSSetConstantBuffers(0, 1, &const_buffer_);
   d3d11_context_->PSSetShader(pixel_shader_.get(), NULL, 0);
   d3d11_context_->DrawIndexed(36, 0, 0);
 
-  swap_chain_->Present(1, 0);
+  // update second cube
+  ConstantBuffer cb2;
+  cb2.mWorld = XMMatrixTranspose(world2_);
+  cb2.mView = XMMatrixTranspose(view_);
+  cb2.mProjection = XMMatrixTranspose(projection_);
+
+  d3d11_context_->UpdateSubresource(const_buffer_.get(), 0, NULL, &cb2, 0, 0);
+
+  d3d11_context_->DrawIndexed(36, 0, 0);
+
+  swap_chain_->Present(0, 0);
 
   d3d11_context_->OMSetRenderTargets(1, &target_view_, NULL);
 }
@@ -49,12 +69,48 @@ void DxCubeRenderWnd::SetUpProjection()
   using namespace DirectX;
 
   world_ = XMMatrixIdentity();
+  world2_ = XMMatrixIdentity();
+
   XMVECTOR eye = XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
   XMVECTOR at = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
   XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 
   view_ = XMMatrixLookAtLH(eye, at, up);
   projection_ = XMMatrixPerspectiveFovLH(XM_PIDIV2, width_ / (float)height_, 0.01f, 100.0f);
+}
+
+void DxCubeRenderWnd::SetUpStencilView()
+{
+    D3D11_TEXTURE2D_DESC descDepth{ 0 };
+    descDepth.Width = width_;
+    descDepth.Height = height_;
+    descDepth.MipLevels = 1;
+    descDepth.ArraySize = 1;
+    descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    descDepth.SampleDesc.Count = 1;
+    descDepth.SampleDesc.Quality = 0;
+    descDepth.Usage = D3D11_USAGE_DEFAULT;
+    descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+    descDepth.CPUAccessFlags = 0;
+    descDepth.MiscFlags = 0;
+    
+    HRESULT hr = d3d11_device_->CreateTexture2D(&descDepth, NULL, &depth_texture_);
+    if (FAILED(hr)) {
+        DxError(hr);
+        return;
+    }
+
+    D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
+    descDSV.Format = descDepth.Format;
+    descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+    descDSV.Texture2D.MipSlice = 0;
+    hr = d3d11_device_->CreateDepthStencilView(depth_texture_.get(), &descDSV, &depth_stencil_view_);
+    if (FAILED(hr)) {
+        DxError(hr);
+        return;
+    }
+
+    d3d11_context_->OMSetRenderTargets(1, &target_view_, depth_stencil_view_.get());
 }
 
 void DxCubeRenderWnd::LoadVertexShader()

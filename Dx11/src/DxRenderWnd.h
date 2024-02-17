@@ -22,6 +22,7 @@ protected:
   virtual void InitDevice();
   virtual void InitRenderView();
   virtual void SetUpViewPort();
+  virtual void SetUpStencilView();
   virtual void LoadVertexShader();
   virtual void LoadPixelShader();
   virtual void LoadData();

@@ -109,6 +109,10 @@ void DxRenderWnd::SetUpViewPort()
   d3d11_context_->RSSetViewports(1, &vp);
 }
 
+void DxRenderWnd::SetUpStencilView()
+{
+}
+
 void DxRenderWnd::LoadVertexShader()
 {
   DxPtr<ID3DBlob> blob = CreateShader(L"shader/vertex_shader.fx", "VS", "vs_5_0");
@@ -155,6 +159,7 @@ void DxRenderWnd::Init()
 
   InitDevice();
   InitRenderView();
+  SetUpStencilView();
   SetUpViewPort();
 
   LoadVertexShader();

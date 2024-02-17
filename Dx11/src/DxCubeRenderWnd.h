@@ -11,14 +11,20 @@ public:
   void Render() override;
 
 private:
+  void SetUpStencilView() override;
   void LoadVertexShader() override;
   void LoadPixelShader() override;
   void LoadData() override;
   void SetUpProjection() override;
 
-private:
-  DirectX::XMMATRIX world_;
-  DirectX::XMMATRIX view_;
-  DirectX::XMMATRIX projection_;
+
+protected:
+  DirectX::XMMATRIX world_ {};
+  DirectX::XMMATRIX view_ {};
+  DirectX::XMMATRIX projection_ {};
+  DirectX::XMMATRIX world2_{};
+
+  DxPtr<ID3D11Texture2D> depth_texture_;
+  DxPtr<ID3D11DepthStencilView> depth_stencil_view_;
 };
 
