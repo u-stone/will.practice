@@ -56,6 +56,9 @@
     <ClInclude Include="src\DxCubeRenderWndWithLights.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\DxCubeRenderWndWithTexture.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr\dxerr.cpp">
@@ -77,6 +80,9 @@
       <Filter>util</Filter>
     </ClCompile>
     <ClCompile Include="src\DxCubeRenderWndWithLights.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DxCubeRenderWndWithTexture.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,6 +113,9 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="shader\cube_with_light.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="shader\cube_with_texture.fx">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

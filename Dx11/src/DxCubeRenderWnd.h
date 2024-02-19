@@ -1,30 +1,26 @@
 #pragma once
 #include "DxRenderWnd.h"
-#include <DirectXMath.h> 
+#include <DirectXMath.h>
 
-class DxCubeRenderWnd :
-  public DxRenderWnd
-{
+class DxCubeRenderWnd : public DxRenderWnd {
 public:
-  DxCubeRenderWnd(HINSTANCE hInst, int width, int height);
+    DxCubeRenderWnd(HINSTANCE hInst, int width, int height);
 
-  void Render() override;
-
-private:
-  void SetUpStencilView() override;
-  void LoadVertexShader() override;
-  void LoadPixelShader() override;
-  void LoadData() override;
-  void SetUpProjection() override;
-
+    void Render() override;
 
 protected:
-  DirectX::XMMATRIX world_ {};
-  DirectX::XMMATRIX view_ {};
-  DirectX::XMMATRIX projection_ {};
-  DirectX::XMMATRIX world2_{};
+    void SetUpStencilView() override;
+    void SetUpVertexLayout(DxPtr<ID3DBlob> blob) override;
+    void LoadPixelShader() override;
+    void LoadData() override;
+    void SetUpProjection() override;
 
-  DxPtr<ID3D11Texture2D> depth_texture_;
-  DxPtr<ID3D11DepthStencilView> depth_stencil_view_;
+protected:
+    DirectX::XMMATRIX world_ {};
+    DirectX::XMMATRIX view_ {};
+    DirectX::XMMATRIX projection_ {};
+    DirectX::XMMATRIX world2_ {};
+
+    DxPtr<ID3D11Texture2D> depth_texture_;
+    DxPtr<ID3D11DepthStencilView> depth_stencil_view_;
 };
-

@@ -36,9 +36,9 @@ public:
   }
 
   DxPtr(const DxPtr& rh) {
-    obj_ = obj_;
+    obj_ = rh.obj_;
     count_ = rh.count_;
-    *count_++;
+    ++*count_;
   }
 
   DxPtr(DxPtr&& rh) noexcept : obj_(rh.obj_), count_(rh.count_) {

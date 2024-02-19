@@ -14,28 +14,21 @@ struct ConstantBuffer {
 DxCubeRenderWndWithLights::DxCubeRenderWndWithLights(HINSTANCE hInst, int width, int height)
     : DxCubeRenderWnd(hInst, width, height)
 {
+    vertex_shader_file_ = L"E:/Practice/will.practice/Dx11/shader/cube_with_light.fx";
+    vertex_entry_ = "VS";
+    pixel_shader_file_ = L"E:/Practice/will.practice/Dx11/shader/cube_with_light.fx";
+    pixel_entry_ = "PS";
 }
 
-void DxCubeRenderWndWithLights::LoadVertexShader()
+void DxCubeRenderWndWithLights::SetUpVertexLayout(DxPtr<ID3DBlob> blob)
 {
-    DxPtr<ID3DBlob> blob = CreateShader(L"shader/cube_with_light.fx", "VS", "vs_5_0");
-    if (!blob) {
-        return;
-    }
-
-    HRESULT hr = d3d11_device_->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), NULL, &vertex_shader_);
-    if (FAILED(hr)) {
-        DxError(hr);
-        return;
-    }
-
     D3D11_INPUT_ELEMENT_DESC layout[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
         { "NORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
     };
     UINT num = ARRAYSIZE(layout);
 
-    hr = d3d11_device_->CreateInputLayout(layout, num, blob->GetBufferPointer(), blob->GetBufferSize(), &layout_);
+    HRESULT hr = d3d11_device_->CreateInputLayout(layout, num, blob->GetBufferPointer(), blob->GetBufferSize(), &layout_);
     if (FAILED(hr)) {
         DxError(hr);
         return;
@@ -46,23 +39,14 @@ void DxCubeRenderWndWithLights::LoadVertexShader()
 
 void DxCubeRenderWndWithLights::LoadPixelShader()
 {
-    DxPtr<ID3DBlob> blob = CreateShader(L"shader/cube_with_light.fx", "PS", "ps_5_0");
-    if (!blob) {
-        return;
-    }
+    DxRenderWnd::LoadPixelShader();
 
-    HRESULT hr = d3d11_device_->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), NULL, &pixel_shader_);
-    if (FAILED(hr)) {
-        DxError(hr);
-        return;
-    }
-
-    DxPtr<ID3DBlob> blob_solid = CreateShader(L"shader/cube_with_light.fx", "PSSolid", "ps_5_0");
+    DxPtr<ID3DBlob> blob_solid = CreateShader(pixel_shader_file_, "PSSolid", "ps_5_0");
     if (!blob_solid) {
         return;
     }
 
-    hr = d3d11_device_->CreatePixelShader(blob_solid->GetBufferPointer(), blob_solid->GetBufferSize(), NULL, &pixel_shader_solid_);
+    HRESULT hr = d3d11_device_->CreatePixelShader(blob_solid->GetBufferPointer(), blob_solid->GetBufferSize(), NULL, &pixel_shader_solid_);
     if (FAILED(hr)) {
         DxError(hr);
         return;
@@ -108,13 +92,13 @@ void DxCubeRenderWndWithLights::LoadData()
         { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
     };
 
-    D3D11_BUFFER_DESC bd{ 0 };
+    D3D11_BUFFER_DESC bd { 0 };
     bd.Usage = D3D11_USAGE_DEFAULT;
     bd.ByteWidth = sizeof(SimpleVertex) * ARRAYSIZE(vertices);
     bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     bd.CPUAccessFlags = 0;
 
-    D3D11_SUBRESOURCE_DATA data{ 0 };
+    D3D11_SUBRESOURCE_DATA data { 0 };
     data.pSysMem = vertices;
     HRESULT hr = d3d11_device_->CreateBuffer(&bd, &data, &vertex_buffer_);
     if (FAILED(hr)) {

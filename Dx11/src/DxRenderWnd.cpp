@@ -14,6 +14,10 @@ using namespace DirectX;
 
 DxRenderWnd::DxRenderWnd(HINSTANCE hInst, int width, int height)
   : RenderWnd(hInst, width, height)
+    , vertex_shader_file_(L"shader/vertex_shader.fx")
+    , vertex_entry_("VS")
+    , pixel_shader_file_(L"shader/pixel_shader.fx")
+    , pixel_entry_("PS")
 {
 }
 
@@ -115,7 +119,7 @@ void DxRenderWnd::SetUpStencilView()
 
 void DxRenderWnd::LoadVertexShader()
 {
-  DxPtr<ID3DBlob> blob = CreateShader(L"shader/vertex_shader.fx", "VS", "vs_5_0");
+    DxPtr<ID3DBlob> blob = CreateShader(vertex_shader_file_, vertex_entry_, "vs_5_0");
   if (!blob) {
     return;
   }
@@ -126,22 +130,27 @@ void DxRenderWnd::LoadVertexShader()
     return;
   }
 
-  D3D11_INPUT_ELEMENT_DESC layout[] = {
-    {"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-  };
-  UINT num = ARRAYSIZE(layout);
-  hr = d3d11_device_->CreateInputLayout(layout, num, blob->GetBufferPointer(), blob->GetBufferSize(), &layout_);
-  if (FAILED(hr)) {
-    DxError(hr);
-    return;
-  }
+  SetUpVertexLayout(blob);
+}
 
-  d3d11_context_->IASetInputLayout(layout_.get());
+void DxRenderWnd::SetUpVertexLayout(DxPtr<ID3DBlob> blob)
+{
+    D3D11_INPUT_ELEMENT_DESC layout[] = {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    };
+    UINT num = ARRAYSIZE(layout);
+    HRESULT hr = d3d11_device_->CreateInputLayout(layout, num, blob->GetBufferPointer(), blob->GetBufferSize(), &layout_);
+    if (FAILED(hr)) {
+        DxError(hr);
+        return;
+    }
+
+    d3d11_context_->IASetInputLayout(layout_.get());
 }
 
 void DxRenderWnd::LoadPixelShader()
 {
-  DxPtr<ID3DBlob> blob = CreateShader(L"shader/pixel_shader.fx", "PS", "ps_5_0");
+  DxPtr<ID3DBlob> blob = CreateShader(pixel_shader_file_, pixel_entry_, "ps_5_0");
   if (!blob) {
     return;
   }
