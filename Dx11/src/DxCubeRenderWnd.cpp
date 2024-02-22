@@ -8,9 +8,9 @@ struct ConstantBuffer {
 
 DxCubeRenderWnd::DxCubeRenderWnd(HINSTANCE hInst, int width, int height)
     : DxRenderWnd(hInst, width, height) {
-  vertex_shader_file_ = L"shader/cube.fx";
+  vertex_shader_file_ = L"shader/cube.hlsl";
   vertex_entry_ = "VS";
-  pixel_shader_file_ = L"shader/cube.fx";
+  pixel_shader_file_ = L"shader/cube.hlsl";
   pixel_entry_ = "PS";
 }
 

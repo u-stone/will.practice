@@ -1,5 +1,5 @@
 #include "DxCubeRenderWndWithTexture.h"
- #include <DDSTextureLoader.h>
+#include <DDSTextureLoader.h>
 #include <WICTextureLoader.h>
 
 using namespace DirectX;
@@ -23,11 +23,12 @@ struct CBChangesEveryFrame {
 };
 
 DxCubeRenderWndWithTexture::DxCubeRenderWndWithTexture(HINSTANCE hInst,
-                                                       int width, int height)
+                                                       int width,
+                                                       int height)
     : DxCubeRenderWnd(hInst, width, height) {
-  vertex_shader_file_ = L"shader/cube_with_texture.fx";
+  vertex_shader_file_ = L"shader/cube_with_texture.hlsl";
   vertex_entry_ = "VS";
-  pixel_shader_file_ = L"shader/cube_with_texture.fx";
+  pixel_shader_file_ = L"shader/cube_with_texture.hlsl";
   pixel_entry_ = "PS";
 }
 
@@ -197,7 +198,7 @@ void DxCubeRenderWndWithTexture::Render() {
   d3d11_context_->PSSetSamplers(0, 1, &sampler_state_);
   d3d11_context_->DrawIndexed(36, 0, 0);
 
-  swap_chain_->Present(1, 0);
+  swap_chain_->Present(0, 0);
 
   d3d11_context_->OMSetRenderTargets(1, &target_view_, NULL);
 }
@@ -207,9 +208,9 @@ void DxCubeRenderWndWithTexture::SetUpTextureFilter() {
   //     CreateDDSTextureFromFile(d3d11_device_.get(),
   //     L"E:/Practice/will.practice/Dx11/res/seafloor.dds",
   //                              &texture_, &texture_rv_, NULL, NULL);
-  HRESULT hr = CreateWICTextureFromFile(
-      d3d11_device_.get(), L"E:/Practice/will.practice/Dx11/res/cyun.jpg",
-      &texture_, &texture_rv_, 0);
+  HRESULT hr = CreateWICTextureFromFile(d3d11_device_.get(), L"res/num.jpeg",
+                                        &texture_, &texture_rv_, 0);
+
   if (FAILED(hr)) {
     DxError(hr);
     return;

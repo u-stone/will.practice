@@ -59,6 +59,9 @@
     <ClInclude Include="src\DxCubeRenderWndWithTexture.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="util\ReadData.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr\dxerr.cpp">
@@ -103,19 +106,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="shader\pixel_shader.fx">
+    <FxCompile Include="shader\cube.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="shader\vertex_shader.fx">
+    <FxCompile Include="shader\cube_with_light.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="shader\cube.fx">
+    <FxCompile Include="shader\cube_with_texture.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="shader\cube_with_light.fx">
+    <FxCompile Include="shader\pixel_shader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="shader\cube_with_texture.fx">
+    <FxCompile Include="shader\vertex_shader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

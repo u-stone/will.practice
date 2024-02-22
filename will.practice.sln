@@ -67,6 +67,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpuid", "cpuid\cpuid.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dx11", "Dx11\Dx11.vcxproj", "{31D0A813-D0E1-41AA-AD63-59544B0B8F43}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fxo_to_text", "fxo_to_text\fxo_to_text.vcxproj", "{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -331,6 +333,14 @@ Global
 		{31D0A813-D0E1-41AA-AD63-59544B0B8F43}.Release|x64.Build.0 = Release|x64
 		{31D0A813-D0E1-41AA-AD63-59544B0B8F43}.Release|x86.ActiveCfg = Release|Win32
 		{31D0A813-D0E1-41AA-AD63-59544B0B8F43}.Release|x86.Build.0 = Release|Win32
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Debug|x64.ActiveCfg = Debug|x64
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Debug|x64.Build.0 = Debug|x64
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Debug|x86.ActiveCfg = Debug|Win32
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Debug|x86.Build.0 = Debug|Win32
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Release|x64.ActiveCfg = Release|x64
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Release|x64.Build.0 = Release|x64
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Release|x86.ActiveCfg = Release|Win32
+		{CD0A763A-CA09-4D10-BF29-7F70627FD8F7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
