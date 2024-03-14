@@ -1,27 +1,26 @@
 #pragma once
 #include <type_traits>
 
-template<typename T>
+template <typename T>
 class DxPtr {
-  //static_assert(!std::is_pointer(T));
+  // static_assert(!std::is_pointer(T));
   typedef T DxType;
   typedef DxType* DxPointer;
-  typedef DxPointer *DxPointerRef;
-public:
+  typedef DxPointer* DxPointerRef;
+
+ public:
   DxPtr() : obj_(nullptr) {
     if (!count_) {
       count_ = new int(1);
-    }
-    else {
+    } else {
       ++*count_;
     }
   }
 
-  DxPtr(T* t) :obj_(t) {
+  DxPtr(T* t) : obj_(t) {
     if (!count_) {
       count_ = new int(1);
-    }
-    else {
+    } else {
       ++*count_;
     }
   }
@@ -29,8 +28,7 @@ public:
   DxPtr(nullptr_t) : obj_(nullptr) {
     if (!count_) {
       count_ = new int(1);
-    }
-    else {
+    } else {
       ++*count_;
     }
   }
@@ -68,32 +66,22 @@ public:
     }
   }
 
-  operator bool() {
-    return !!obj_;
-  }
+  operator bool() { return !!obj_; }
 
-  operator T*() {
-    return obj_;
-  }
+  operator T*() { return obj_; }
 
-  T* get() {
-    return obj_;
-  }
+  T* get() { return obj_; }
 
-  T** operator&() {
-    return &obj_;
-  }
+  T** operator&() { return &obj_; }
 
-  T* operator->() {
-    return obj_;
-  }
+  T* operator->() { return obj_; }
 
   void swap(DxPtr& rh) {
     std::swap(obj_, rh.obj_);
     std::swap(count_, rh.count_);
   }
 
-private:
+ private:
   DxPointer obj_;
   int* count_ = nullptr;
 };

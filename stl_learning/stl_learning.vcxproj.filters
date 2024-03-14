@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="container">
+      <UniqueIdentifier>{b92042e5-8081-40e8-857d-7d95c5846cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="alg">
+      <UniqueIdentifier>{c81bd81d-9f0d-4677-b214-09cea3f602b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ptr">
+      <UniqueIdentifier>{8e717af9-5092-47ec-89e6-d04986df01a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{2f333894-1ac7-486a-8879-2f0fb9b015c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="concurrency">
+      <UniqueIdentifier>{aefd4b3a-8b29-485f-b639-4541997fbac8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stl_learning.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="container\l_map.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\entry_container.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_vector.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_array.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_set.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_list.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_deque.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_forward_list.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_multimap.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_multiset.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_unordered_map.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_unordered_set.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_unordered_multimap.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_unordered_multiset.h">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\l_initializer_list.h">
+      <Filter>container</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

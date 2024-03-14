@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{B784F111-964A-4C01-BD7D-BF9690C43889}</ProjectGuid>
+    <ProjectGuid>{37E99050-2C58-4B66-8AEF-33CC1E885890}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>cpptest</RootNamespace>
+    <RootNamespace>stllearning</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -91,9 +91,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,7 +151,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cpp_test.cpp" />
+    <ClCompile Include="stl_learning.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="container\entry_container.h" />
+    <ClInclude Include="container\l_array.h" />
+    <ClInclude Include="container\l_deque.h" />
+    <ClInclude Include="container\l_forward_list.h" />
+    <ClInclude Include="container\l_initializer_list.h" />
+    <ClInclude Include="container\l_list.h" />
+    <ClInclude Include="container\l_map.h" />
+    <ClInclude Include="container\l_multimap.h" />
+    <ClInclude Include="container\l_multiset.h" />
+    <ClInclude Include="container\l_set.h" />
+    <ClInclude Include="container\l_unordered_map.h" />
+    <ClInclude Include="container\l_unordered_multimap.h" />
+    <ClInclude Include="container\l_unordered_multiset.h" />
+    <ClInclude Include="container\l_unordered_set.h" />
+    <ClInclude Include="container\l_vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
